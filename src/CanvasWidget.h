@@ -3,17 +3,17 @@
 #include <QWidget>
 #include <QPainter>
 #include <QMouseEvent>
+#include <functional>
 
 
 class CanvasWidget : public QWidget {
 Q_OBJECT
 private:
-    double r;
+    std::function<void(QPainter &)> callback;
+
 public:
     CanvasWidget(QWidget *parent);
-
-public slots:
-    void setR(double new_r);
+    void setCallback(std::function<void(QPainter &)> cb);
 
 protected:
     void paintEvent(QPaintEvent *event) override;
